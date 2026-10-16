@@ -11,7 +11,7 @@ let memoryServer = null;
  *   its files in server/.data, so the app works without installing MongoDB.
  */
 async function connectDB() {
-  let uri = process.env.MONGO_URI;
+  let uri = process.env.MONGO_URI || process.env.MONGODB_URI;
 
   if (!uri) {
     const { MongoMemoryServer } = require('mongodb-memory-server');
