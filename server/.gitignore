@@ -1,0 +1,17 @@
+# Server Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+
+# Local Embedded Database data
+.data/
+*.lock
+
+# Logs
+*.log
+npm-debug.log*

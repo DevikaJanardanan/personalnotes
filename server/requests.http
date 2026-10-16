@@ -1,0 +1,118 @@
+### ------------------------------------------------------------
+### Manual API tests – open in VS Code with the "REST Client"
+### extension and click "Send Request" above each block.
+### ------------------------------------------------------------
+
+@base = http://localhost:5000/api
+# Paste the token from the login/register response here:
+@token = PASTE_TOKEN_HERE
+
+### Health check
+GET {{base}}/health
+
+### Register
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Devika",
+  "email": "devika@example.com",
+  "password": "secret123"
+}
+
+### Login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "devika@example.com",
+  "password": "secret123"
+}
+
+### Current user
+GET {{base}}/auth/me
+Authorization: Bearer {{token}}
+
+### Create a note
+POST {{base}}/notes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "DBMS revision",
+  "content": "Normal forms: 1NF, 2NF, 3NF, BCNF",
+  "tags": ["study", "exam"],
+  "pinned": true,
+  "color": "yellow"
+}
+
+### List notes (search, tag, sort are optional)
+GET {{base}}/notes?search=dbms&tag=study&sort=updated
+Authorization: Bearer {{token}}
+
+### Get one note
+GET {{base}}/notes/NOTE_ID
+Authorization: Bearer {{token}}
+
+### Update a note
+PUT {{base}}/notes/NOTE_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "DBMS revision – done",
+  "pinned": false
+}
+
+### Toggle pin
+PATCH {{base}}/notes/NOTE_ID/pin
+Authorization: Bearer {{token}}
+
+### Set (or change) the lock password
+PUT {{base}}/auth/lock-password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "newPassword": "1234"
+}
+
+### Lock a note
+PATCH {{base}}/notes/NOTE_ID/lock
+Authorization: Bearer {{token}}
+
+### Open a locked note (returns the hidden content)
+POST {{base}}/notes/NOTE_ID/unlock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "password": "1234"
+}
+
+### Edit a locked note
+PUT {{base}}/notes/NOTE_ID
+Authorization: Bearer {{token}}
+X-Lock-Password: 1234
+Content-Type: application/json
+
+{
+  "content": "Updated secret"
+}
+
+### Remove the lock
+PATCH {{base}}/notes/NOTE_ID/lock
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "password": "1234"
+}
+
+### Stats
+GET {{base}}/notes/stats
+Authorization: Bearer {{token}}
+
+### Delete a note
+DELETE {{base}}/notes/NOTE_ID
+Authorization: Bearer {{token}}

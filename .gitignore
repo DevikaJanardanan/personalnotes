@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Production builds
+dist/
+dist-ssr/
+build/
+client/dist/
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+!**/.env.example
+
+# Local Embedded Database
+server/.data/
+.data/
+*.lock
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System & OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.local
+
+# Archive files
+*.zip
+personal-notes-app.zip

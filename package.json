@@ -1,0 +1,17 @@
+{
+  "name": "personal-notes-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal Notes App – MERN stack mini-project (MongoDB, Express, React, Node)",
+  "scripts": {
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n API,WEB -c blue,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "test": "npm test --prefix server",
+    "build": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
